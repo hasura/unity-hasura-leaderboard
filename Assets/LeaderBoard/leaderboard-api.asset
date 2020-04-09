@@ -1,0 +1,402 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ccf793b7ca1cc645b9cd36d753b8e3c, type: 3}
+  m_Name: leaderboard-api
+  m_EditorClassIdentifier: 
+  url: https://baris-leaderboard-test.herokuapp.com/v1/graphql
+  queries:
+  - name: getPlayers
+    type: 0
+    query: "query getPlayers{\n    players{\n        id\n        name\n        score\n
+      \   }\n}"
+    queryString: players
+    returnType: players
+    queryOptions:
+    - players
+    - players_aggregate
+    - players_by_pk
+    fields:
+    - index: 0
+      name: id
+      type: uuid
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 1
+      name: name
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 2
+      name: score
+      type: Int
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    isComplete: 1
+  - name: topPlayers
+    type: 0
+    query: "query topPlayers{\n    players(  limit :10, order_by :{ score :desc},
+      where :{ score :{ _is_null :false}} ){\n        id\n        name\n        score\n
+      \   }\n}"
+    queryString: players
+    returnType: players
+    queryOptions:
+    - players
+    - players_aggregate
+    - players_by_pk
+    fields:
+    - index: 0
+      name: id
+      type: uuid
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 1
+      name: name
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 2
+      name: score
+      type: Int
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    isComplete: 1
+  mutations:
+  - name: addPlayer
+    type: 1
+    query: "mutation addPlayer{\n    insert_players(  objects :{ name :\"Poppy\"}
+      ){\n        returning{\n            id\n            name\n            score\n
+      \       }\n    }\n}"
+    queryString: insert_players
+    returnType: players_mutation_response
+    queryOptions:
+    - UpdateScore
+    - delete_players
+    - delete_players_by_pk
+    - insert_players
+    - insert_players_one
+    - update_players
+    - update_players_by_pk
+    fields:
+    - index: 1
+      name: returning
+      type: players
+      parentIndexes: 
+      hasSubField: 1
+      possibleFields:
+      - name: affected_rows
+        type: Int
+      - name: returning
+        type: players
+      hasChanged: 0
+    - index: 0
+      name: id
+      type: uuid
+      parentIndexes: 00000000
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 1
+      name: name
+      type: String
+      parentIndexes: 00000000
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 2
+      name: score
+      type: Int
+      parentIndexes: 00000000
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    isComplete: 1
+  - name: updateScore
+    type: 1
+    query: "mutation updateScore{\n    update_players_by_pk(  pk_columns :{ id :\"0dc11edd-5d5c-403b-9bdb-e37df860966b\"},
+      _set :{ score :20} ){\n        id\n        name\n        score\n    }\n}"
+    queryString: update_players_by_pk
+    returnType: players
+    queryOptions:
+    - UpdateScore
+    - delete_players
+    - delete_players_by_pk
+    - insert_players
+    - insert_players_one
+    - update_players
+    - update_players_by_pk
+    fields:
+    - index: 0
+      name: id
+      type: uuid
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 1
+      name: name
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 2
+      name: score
+      type: Int
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    isComplete: 1
+  - name: UpdateScoreAction
+    type: 1
+    query: "mutation UpdateScoreAction{\n    UpdateScore(  playerId :\"7b93b015-901c-4c0f-8760-2c3d63f339e4\",
+      score :9500 ){\n        id\n        name\n        score\n    }\n}"
+    queryString: UpdateScore
+    returnType: UpdateScoreOutput
+    queryOptions:
+    - UpdateScore
+    - delete_players
+    - delete_players_by_pk
+    - insert_players
+    - insert_players_one
+    - update_players
+    - update_players_by_pk
+    fields:
+    - index: 0
+      name: id
+      type: UpdateScoreUuid
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: UpdateScoreUuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 1
+      name: name
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: UpdateScoreUuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 2
+      name: score
+      type: Int
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: UpdateScoreUuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    isComplete: 1
+  subscriptions:
+  - name: livePlayers
+    type: 2
+    query: "subscription livePlayers{\n    players{\n        id\n        name\n        score\n
+      \   }\n}"
+    queryString: players
+    returnType: players
+    queryOptions:
+    - players
+    - players_aggregate
+    - players_by_pk
+    fields:
+    - index: 0
+      name: id
+      type: uuid
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 1
+      name: name
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 2
+      name: score
+      type: Int
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    isComplete: 1
+  - name: topLivePlayers
+    type: 2
+    query: "subscription topLivePlayers{\n    players(  limit :10, order_by :{ score
+      :desc}, where :{ score :{ _is_null :false}} ){\n        id\n        name\n        score\n
+      \   }\n}"
+    queryString: players
+    returnType: players
+    queryOptions:
+    - players
+    - players_aggregate
+    - players_by_pk
+    fields:
+    - index: 0
+      name: id
+      type: uuid
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 1
+      name: name
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    - index: 2
+      name: score
+      type: Int
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: id
+        type: uuid
+      - name: name
+        type: String
+      - name: score
+        type: Int
+      hasChanged: 0
+    isComplete: 1
+  loading: 0
